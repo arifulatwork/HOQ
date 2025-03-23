@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             absoluteImportanceRow.innerHTML = `
                 <td colspan="2">Absolute Importance</td>
                 ${Array.from({ length: tbody.children[0].querySelectorAll('.relationship-select').length }, () =>
-                    `<td><input type="number" class="absolute-importance" value="0"></td>`
+                    `<td><input type="number" class="absolute-importance" value="0" readonly></td>`
                 ).join('')}
                 ${Array.from({ length: 5 }, () =>
                     `<td></td>` // Empty cells for Competitor Ratings
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const relativeImportanceRow = document.createElement('tr');
             relativeImportanceRow.id = 'relative-importance-row';
             relativeImportanceRow.innerHTML = `
-                <td colspan="2">Relative Importance</td>
+                <td colspan="2">Relative Importance (%)</td>
                 ${Array.from({ length: tbody.children[0].querySelectorAll('.relationship-select').length }, () =>
-                    `<td><input type="number" class="relative-importance" value="0"></td>`
+                    `<td><input type="number" class="relative-importance" value="0" readonly></td>`
                 ).join('')}
                 ${Array.from({ length: 5 }, () =>
                     `<td></td>` // Empty cells for Competitor Ratings
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add new cells
             for (let i = cells.length; i < characteristicCount; i++) {
                 const newCell = document.createElement('td');
-                newCell.innerHTML = `<input type="number" class="${className}" value="0">`;
+                newCell.innerHTML = `<input type="number" class="${className}" value="0" ${className === 'absolute-importance' || className === 'relative-importance' ? 'readonly' : ''}>`;
                 row.insertBefore(newCell, row.children[row.children.length - 5]);
             }
         } else if (cells.length > characteristicCount) {
@@ -119,6 +119,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 row.removeChild(row.children[row.children.length - 6]);
             }
         }
+    }
+
+    // Function to calculate Absolute Importance and Relative Importance (%)
+    function updateImportanceValues() {
+        const requirementRows = Array.from(tbody.querySelectorAll('tr')).filter(row => !row.id); // Exclude additional rows
+        const absoluteImportanceRow = document.getElementById('absolute-importance-row');
+        const relativeImportanceRow = document.getElementById('relative-importance-row');
+
+        if (!absoluteImportanceRow || !relativeImportanceRow) return;
+
+        const absoluteImportanceCells = absoluteImportanceRow.querySelectorAll('.absolute-importance');
+        const relativeImportanceCells = relativeImportanceRow.querySelectorAll('.relative-importance');
+
+        // Reset values
+        absoluteImportanceCells.forEach(cell => cell.value = 0);
+        relativeImportanceCells.forEach(cell => cell.value = 0);
+
+        // Calculate Absolute Importance
+        requirementRows.forEach(row => {
+            const importance = parseFloat(row.querySelector('.importance').value) || 0;
+            const relationshipSelects = row.querySelectorAll('.relationship-select');
+
+            relationshipSelects.forEach((select, index) => {
+                const relationshipValue = parseFloat(select.value) || 0;
+                absoluteImportanceCells[index].value = (parseFloat(absoluteImportanceCells[index].value) || 0) + (importance * relationshipValue);
+            });
+        });
+
+        // Calculate Relative Importance (%)
+        const totalAbsoluteImportance = Array.from(absoluteImportanceCells).reduce((sum, cell) => sum + (parseFloat(cell.value) || 0), 0);
+
+        absoluteImportanceCells.forEach((cell, index) => {
+            const absoluteValue = parseFloat(cell.value) || 0;
+            relativeImportanceCells[index].value = totalAbsoluteImportance === 0 ? 0 : ((absoluteValue / totalAbsoluteImportance) * 100).toFixed(2);
+        });
     }
 
     // Function to initialize select boxes with icons
@@ -133,6 +168,9 @@ document.addEventListener('DOMContentLoaded', function () {
             select.addEventListener('change', function () {
                 const selectedOption = this.options[this.selectedIndex];
                 this.setAttribute('data-selected-icon', selectedOption.getAttribute('data-icon'));
+
+                // Recalculate Absolute and Relative Importance
+                updateImportanceValues();
             });
         });
     }
@@ -166,12 +204,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Initialize the select box in the new row
         initializeSelectBoxes();
+
+        // Recalculate Absolute and Relative Importance
+        updateImportanceValues();
     });
 
     // Delete Requirement
     document.getElementById('delete-requirement').addEventListener('click', function () {
         if (tbody.children.length > 7) { // Ensure at least 3 requirements + additional rows remain
             tbody.removeChild(tbody.children[tbody.children.length - 5]); // Remove the second-to-last requirement row
+
+            // Recalculate Absolute and Relative Importance
+            updateImportanceValues();
         } else {
             alert('At least 3 requirements must remain.');
         }
@@ -200,9 +244,9 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (row.id === 'how-muches-row') {
                 newCell.innerHTML = `<input type="number" class="how-much" value="0">`;
             } else if (row.id === 'absolute-importance-row') {
-                newCell.innerHTML = `<input type="number" class="absolute-importance" value="0">`;
+                newCell.innerHTML = `<input type="number" class="absolute-importance" value="0" readonly>`;
             } else if (row.id === 'relative-importance-row') {
-                newCell.innerHTML = `<input type="number" class="relative-importance" value="0">`;
+                newCell.innerHTML = `<input type="number" class="relative-importance" value="0" readonly>`;
             } else {
                 newCell.innerHTML = `
                     <select class="relationship-select">
@@ -218,6 +262,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Initialize the select boxes in the new cells
         initializeSelectBoxes();
+
+        // Recalculate Absolute and Relative Importance
+        updateImportanceValues();
     });
 
     // Delete Characteristic
@@ -236,6 +283,9 @@ document.addEventListener('DOMContentLoaded', function () {
             tbody.querySelectorAll('tr').forEach(row => {
                 row.removeChild(row.children[row.children.length - 6]);
             });
+
+            // Recalculate Absolute and Relative Importance
+            updateImportanceValues();
         } else {
             alert('At least 3 characteristics must remain.');
         }
@@ -246,4 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize select boxes on page load
     initializeSelectBoxes();
+
+    // Calculate initial Absolute and Relative Importance
+    updateImportanceValues();
 });
