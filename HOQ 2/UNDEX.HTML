@@ -9,12 +9,6 @@
 </head>
 <body>
     <h1>House of Quality</h1>
-    <div class="controls">
-        <button id="add-requirement">Add Requirement</button>
-        <button id="delete-requirement">Delete Requirement</button>
-        <button id="add-characteristic">Add Characteristic</button>
-        <button id="delete-characteristic">Delete Characteristic</button>
-    </div>
     <div class="table-container">
         <table id="house-of-quality">
             <!-- Column Headers -->
@@ -40,7 +34,6 @@
             </thead>
             <!-- Table Body -->
             <tbody>
-                <!-- Default Rows -->
                 <tr>
                     <td>Requirement 1</td>
                     <td><input type="number" class="importance" value="5"></td>
@@ -82,6 +75,38 @@
                     <td><input type="number" value="2"></td>
                     <td><input type="number" value="3"></td>
                     <td><input type="number" value="4"></td>
+                </tr>
+                <!-- Organization Difficulty Row -->
+                <tr>
+                    <td colspan="2"><strong>Organization Difficulty</strong></td>
+                    <td><input type="number" value="2"></td>
+                    <td><input type="number" value="4"></td>
+                    <td><input type="number" value="3"></td>
+                    <td colspan="5"></td> <!-- Span Competitor Ratings columns -->
+                </tr>
+                <!-- How Muches Row -->
+                <tr>
+                    <td colspan="2"><strong>How Muches</strong></td>
+                    <td><input type="number" value="5"></td>
+                    <td><input type="number" value="3"></td>
+                    <td><input type="number" value="2"></td>
+                    <td colspan="5"></td> <!-- Span Competitor Ratings columns -->
+                </tr>
+                <!-- Absolute Importance Row -->
+                <tr>
+                    <td colspan="2"><strong>Absolute Importance</strong></td>
+                    <td><span class="absolute-importance">0</span></td>
+                    <td><span class="absolute-importance">0</span></td>
+                    <td><span class="absolute-importance">0</span></td>
+                    <td colspan="5"></td> <!-- Span Competitor Ratings columns -->
+                </tr>
+                <!-- Relative Importance Row -->
+                <tr>
+                    <td colspan="2"><strong>Relative Importance</strong></td>
+                    <td><span class="relative-importance">0</span></td>
+                    <td><span class="relative-importance">0</span></td>
+                    <td><span class="relative-importance">0</span></td>
+                    <td colspan="5"></td> <!-- Span Competitor Ratings columns -->
                 </tr>
             </tbody>
         </table>
