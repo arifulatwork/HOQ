@@ -68,32 +68,20 @@ th {
 }
 
 /* Input Styles */
-input[type="text"],
-input[type="number"],
-select {
-    width: 100%;
+input[type="number"] {
+    width: 50px;
     padding: 8px;
+    text-align: center;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     font-size: 14px;
-    color: #333;
-    background-color: #fff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-select:focus {
+input[type="number"]:focus {
     border-color: #1976d2; /* Material Blue */
     box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
     outline: none;
-}
-
-/* Editable Requirement and Characteristic Names */
-.requirement-name,
-.characteristic-name {
-    font-weight: 500;
-    color: #1976d2; /* Material Blue */
 }
 
 /* Relationship Matrix Select Box */
@@ -190,10 +178,8 @@ tr:hover {
         font-size: 12px;
     }
 
-    input[type="text"],
-    input[type="number"],
-    select {
-        width: 80px;
+    input[type="number"] {
+        width: 40px;
         padding: 6px;
         font-size: 12px;
     }

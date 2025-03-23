@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House of Quality</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>House of Quality</h1>
+    <div class="controls">
+        <button id="add-requirement">Add Requirement</button>
+        <button id="delete-requirement">Delete Requirement</button>
+        <button id="add-characteristic">Add Characteristic</button>
+        <button id="delete-characteristic">Delete Characteristic</button>
+    </div>
+    <div class="table-container">
+        <table id="house-of-quality">
+            <!-- Column Headers -->
+            <thead>
+                <tr>
+                    <th rowspan="2">Customer Requirements</th>
+                    <th rowspan="2">Importance</th>
+                    <th colspan="3">Technical Characteristics</th>
+                    <th colspan="5">Competitor Ratings (1-5)</th>
+                </tr>
+                <tr>
+                    <!-- Technical Characteristics -->
+                    <th>Characteristic 1</th>
+                    <th>Characteristic 2</th>
+                    <th>Characteristic 3</th>
+                    <!-- Competitor Ratings -->
+                    <th>Company 1</th>
+                    <th>Company 2</th>
+                    <th>Company 3</th>
+                    <th>Company 4</th>
+                    <th>Company 5</th>
+                </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody>
+                <!-- Default Rows -->
+                <tr>
+                    <td>Requirement 1</td>
+                    <td><input type="number" class="importance" value="5"></td>
+                    <!-- Relationship Matrix -->
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <!-- Competitor Ratings -->
+                    <td><input type="number" value="2"></td>
+                    <td><input type="number" value="4"></td>
+                    <td><input type="number" value="3"></td>
+                    <td><input type="number" value="5"></td>
+                    <td><input type="number" value="1"></td>
+                </tr>
+                <tr>
+                    <td>Requirement 2</td>
+                    <td><input type="number" class="importance" value="3"></td>
+                    <!-- Relationship Matrix -->
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <!-- Competitor Ratings -->
+                    <td><input type="number" value="3"></td>
+                    <td><input type="number" value="2"></td>
+                    <td><input type="number" value="4"></td>
+                    <td><input type="number" value="1"></td>
+                    <td><input type="number" value="5"></td>
+                </tr>
+                <tr>
+                    <td>Requirement 3</td>
+                    <td><input type="number" class="importance" value="4"></td>
+                    <!-- Relationship Matrix -->
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="relationship-select">
+                            <option value="0">-</option>
+                            <option value="9" data-icon="●">Strong (9)</option>
+                            <option value="4" data-icon="○">Medium (4)</option>
+                            <option value="1" data-icon="▲">Weak (1)</option>
+                        </select>
+                    </td>
+                    <!-- Competitor Ratings -->
+                    <td><input type="number" value="5"></td>
+                    <td><input type="number" value="1"></td>
+                    <td><input type="number" value="2"></td>
+                    <td><input type="number" value="3"></td>
+                    <td><input type="number" value="4"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
