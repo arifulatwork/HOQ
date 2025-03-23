@@ -1,4 +1,4 @@
-/* styles.css */
+/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 20px;
@@ -13,6 +13,7 @@ h1 {
     margin-bottom: 24px;
 }
 
+/* Controls */
 .controls {
     text-align: center;
     margin-bottom: 16px;
@@ -34,6 +35,7 @@ h1 {
     background-color: #1565c0; /* Darker Blue */
 }
 
+/* Table Container */
 .table-container {
     overflow-x: auto;
     background-color: #ffffff;
@@ -44,6 +46,7 @@ h1 {
     max-width: 1200px;
 }
 
+/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -64,6 +67,7 @@ th {
     text-transform: uppercase;
 }
 
+/* Input Styles */
 input[type="number"] {
     width: 50px;
     padding: 8px;
@@ -80,11 +84,85 @@ input[type="number"]:focus {
     outline: none;
 }
 
+/* Relationship Matrix Select Box */
+.relationship-select {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231976d2'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.relationship-select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+    outline: none;
+}
+
+/* Custom Icons for Options */
+.relationship-select option {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.relationship-select option[data-icon]::before {
+    content: attr(data-icon);
+    margin-right: 8px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.relationship-select option[value="9"]::before {
+    color: #000; /* Black circle for Strong */
+}
+
+.relationship-select option[value="4"]::before {
+    color: #fff; /* White circle for Medium */
+    text-shadow: 0 0 1px #000; /* Add outline for visibility */
+}
+
+.relationship-select option[value="1"]::before {
+    color: #000; /* Black triangle for Weak */
+}
+
+/* Display Selected Icon */
+.relationship-select[data-selected-icon]::after {
+    content: attr(data-selected-icon);
+    margin-left: 8px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.relationship-select[data-selected-icon="●"]::after {
+    color: #000; /* Black circle for Strong */
+}
+
+.relationship-select[data-selected-icon="○"]::after {
+    color: #fff; /* White circle for Medium */
+    text-shadow: 0 0 1px #000; /* Add outline for visibility */
+}
+
+.relationship-select[data-selected-icon="▲"]::after {
+    color: #000; /* Black triangle for Weak */
+}
+
+/* Hover Effect for Rows */
 tr:hover {
     background-color: #f1f8ff; /* Light blue for hover */
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
     .controls button {
         padding: 8px 16px;
@@ -103,6 +181,11 @@ tr:hover {
     input[type="number"] {
         width: 40px;
         padding: 6px;
+        font-size: 12px;
+    }
+
+    .relationship-select {
+        width: 80px;
         font-size: 12px;
     }
 }
